@@ -4,8 +4,11 @@
 // Author: Kyle McMaster
 // Date: 2025-06-22
 
-#include "include/general-game-playing-agent/games/twenty48.hpp"
+#include "general-game-playing-agent/games/twenty48.hpp"
 
 int main() {
     
+    Twenty48 game = Twenty48();
+
+
 }

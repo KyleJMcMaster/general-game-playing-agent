@@ -19,7 +19,7 @@ class SinglePlayerGameState {
 
 public:
 
-    SinglePlayerGameState(std::unique_ptr<int[]>& board, size_t rows, std::unique_ptr<std::unordered_map<std::string, float>> state_values)
+    SinglePlayerGameState(std::unique_ptr<int[]> board, size_t rows, std::unique_ptr<std::unordered_map<std::string, float>> state_values)
         : board(std::move(board)), rows(rows), state_values(std::move(state_values)) {}
 
     int* get_board(){return board.get();}
@@ -31,10 +31,12 @@ public:
 class SinglePlayerGame {
 public:
 
-    virtual SinglePlayerGameState initialize_game();
-    virtual SinglePlayerGameState get_state();
-    virtual int* get_valid_moves();
-    virtual void apply_move(int move);
+    virtual SinglePlayerGameState initialize_game() = 0;
+    virtual SinglePlayerGameState get_state() = 0;
+    virtual int* get_valid_moves() = 0;
+    virtual void apply_move(int move) = 0;
+
+     virtual ~SinglePlayerGame() = default;
 };
 
 
