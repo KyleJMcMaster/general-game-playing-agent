@@ -19,14 +19,16 @@ class Twenty48 : public SinglePlayerGame {
 
     void place_random_tile();
     int get_empty_tiles(int *tiles);
-    bool compare_tiles(int t1, int t2);
+    bool move_tiles(int t1, int t2);
+    bool Twenty48::check_tiles(int t1, int t2);
+    bool Twenty48::check_move(int move);
 
 public:
 
     Twenty48(int rows = 4, int cols = 4, float two_prob = 0.9);
     void initialize_game() override;
     std::shared_ptr<SinglePlayerGameState> get_state() override;
-    int* get_valid_moves() override;
+    std::vector<int> get_valid_moves() override;
     void apply_move(int move) override;
 
 };

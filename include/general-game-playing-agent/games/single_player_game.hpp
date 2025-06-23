@@ -36,7 +36,7 @@ public:
 
     virtual void initialize_game() = 0;
     virtual std::shared_ptr<SinglePlayerGameState> get_state() = 0;
-    virtual int* get_valid_moves() = 0;
+    virtual std::vector<int> get_valid_moves() = 0;
     virtual void apply_move(int move) = 0;
 
      virtual ~SinglePlayerGame() = default;

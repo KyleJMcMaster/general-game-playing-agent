@@ -16,12 +16,12 @@ int main() {
 
     disp.display(game.get_state());
 
-    for (int i = 0; i < 10; i++){
+    for (int i = 0; i < 11; i++){
         std::cout<<i%4<<"\n";
-        game.apply_move(0);
+        game.apply_move(i%4);
+        std::cout<<game.get_state()->get_state_values()["Score"]<<"\n";
         disp.display(game.get_state());
-        game.apply_move(2);
-        disp.display(game.get_state());
+        
     }
 
 

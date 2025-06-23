@@ -51,7 +51,7 @@ void Twenty48::place_random_tile() {
 
 }
 
-bool Twenty48::compare_tiles(int t1, int t2){
+bool Twenty48::move_tiles(int t1, int t2){
     //try to move and combine tiles. If destination tile is non-zero, return true
     int* board = game_state->get_board();
     std::unordered_map<std::string, float>& state_values = game_state->get_state_values();
@@ -72,6 +72,73 @@ bool Twenty48::compare_tiles(int t1, int t2){
         }
         return false;
     }
+
+bool Twenty48::check_tiles(int t1, int t2){
+    //try to move and combine tiles. If valid move would have occured, return true. Does not actually perform move.
+    int* board = game_state->get_board();
+    std::unordered_map<std::string, float>& state_values = game_state->get_state_values();
+
+        if(board[t2] != 0){
+            if (board[t1] == 0){//destination is 0, move t2 to t1
+                return true;
+            }
+            else if(board[t1] == board[t2]){//match, combine tiles and increment score
+                return true;
+            }
+        }
+        return false;
+}
+
+bool Twenty48::check_move(int move){
+    // 0: RIGHT, 1: LEFT, 2:UP, 3:DOWN
+    switch(move){
+        case 0: //RIGHT
+            for(int row = 0; row < rows; row++){
+                for(int t1 = (row+1)*cols-1; t1 > row*cols; t1 -= 1) { // stop in second to last col
+                    for(int t2 = t1 - 1; t2 > row*cols-1; t2 -=1){
+                        if(check_tiles(t1, t2)){
+                            return true;
+                        }
+                    }
+                }
+            }
+            break;
+        case 1: //LEFT
+            for(int row = 0; row < rows; row++){
+                for(int t1 = row*cols; t1 < (row+1)*cols; t1 += 1) { // stop in second to last col
+                    for(int t2 = t1 + 1; t2 < (row+1)*cols+1; t2 +=1){
+                        if(check_tiles(t1, t2)){
+                            return true;
+                        }
+                    }
+                }
+            }
+            break;
+        case 2: //UP
+            for(int col = 0; col < cols; col++){
+                for(int t1 = col; t1 < ((rows-2)*cols + col + 1); t1 += cols) { // stop in second to last row
+                    for(int t2 = t1 + cols; t2 < ((rows-1)*cols + col + 1); t2 += cols){
+                        if(check_tiles(t1, t2)){
+                            return true;
+                        }
+                    }
+                }
+            }
+            break;
+        case 3: //DOWN
+            for(int col = 0; col < cols; col++){
+                for(int t1 = (rows-1)*cols + col; t1 > cols+col-1; t1 -= cols) { // stop in second to last row
+                    for(int t2 = t1 - cols; t2 >= col; t2 -= cols){
+                        if(check_tiles(t1, t2)){
+                            return true;
+                        }
+                    }
+                }
+            }
+            break;
+    }
+    return false;
+}
 
 // Virtual function overrides
 void Twenty48::initialize_game() {
@@ -94,8 +161,16 @@ std::shared_ptr<SinglePlayerGameState> Twenty48::get_state() {
     return game_state;
 }
 
-int* Twenty48::get_valid_moves() {
-    // implementation here
+std::vector<int> Twenty48::get_valid_moves() {
+    // 0: RIGHT, 1: LEFT, 2:UP, 3:DOWN
+    std::vector<int> moves;
+    for(int i = 0; i < 4; i++){
+        if (check_move(i)){
+            moves.push_back(i);
+        }
+    }
+    return moves;
+    
 }
 
 void Twenty48::apply_move(int move) {
@@ -105,7 +180,7 @@ void Twenty48::apply_move(int move) {
             for(int row = 0; row < rows; row++){
                 for(int t1 = (row+1)*cols-1; t1 > row*cols; t1 -= 1) { // stop in second to last col
                     for(int t2 = t1 - 1; t2 > row*cols-1; t2 -=1){
-                        if(compare_tiles(t1, t2)){
+                        if(move_tiles(t1, t2)){
                             break;
                         }
                     }
@@ -116,7 +191,7 @@ void Twenty48::apply_move(int move) {
             for(int row = 0; row < rows; row++){
                 for(int t1 = row*cols; t1 < (row+1)*cols; t1 += 1) { // stop in second to last col
                     for(int t2 = t1 + 1; t2 < (row+1)*cols+1; t2 +=1){
-                        if(compare_tiles(t1, t2)){
+                        if(move_tiles(t1, t2)){
                             break;
                         }
                     }
@@ -127,7 +202,7 @@ void Twenty48::apply_move(int move) {
             for(int col = 0; col < cols; col++){
                 for(int t1 = col; t1 < ((rows-2)*cols + col + 1); t1 += cols) { // stop in second to last row
                     for(int t2 = t1 + cols; t2 < ((rows-1)*cols + col + 1); t2 += cols){
-                        if(compare_tiles(t1, t2)){
+                        if(move_tiles(t1, t2)){
                             break;
                         }
                     }
@@ -138,7 +213,7 @@ void Twenty48::apply_move(int move) {
             for(int col = 0; col < cols; col++){
                 for(int t1 = (rows-1)*cols + col; t1 > cols+col-1; t1 -= cols) { // stop in second to last row
                     for(int t2 = t1 - cols; t2 >= col; t2 -= cols){
-                        if(compare_tiles(t1, t2)){
+                        if(move_tiles(t1, t2)){
                             break;
                         }
                     }
