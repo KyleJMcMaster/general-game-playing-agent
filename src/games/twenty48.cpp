@@ -50,7 +50,7 @@ void Twenty48::place_random_tile() {
 }
 
 // Virtual function overrides
-SinglePlayerGameState Twenty48::initialize_game() {
+void Twenty48::initialize_game() {
 
     size_t size = rows * cols;
     std::unique_ptr<int[]> board = std::make_unique<int[]>(size);
@@ -58,7 +58,7 @@ SinglePlayerGameState Twenty48::initialize_game() {
     std::unordered_map<std::string, float>{{"Score", 0.0f}});
 
     game_state = std::shared_ptr<SinglePlayerGameState>(
-    new SinglePlayerGameState(std::move(board), rows, std::move(state_values)));
+    new SinglePlayerGameState(std::move(board), rows, cols, std::move(state_values)));
 
     place_random_tile();
     place_random_tile();
@@ -66,8 +66,8 @@ SinglePlayerGameState Twenty48::initialize_game() {
     int* game_board = game_state->get_board();
 }
 
-SinglePlayerGameState Twenty48::get_state() {
-    // implementation here
+std::shared_ptr<SinglePlayerGameState> Twenty48::get_state() {
+    return game_state;
 }
 
 int* Twenty48::get_valid_moves() {

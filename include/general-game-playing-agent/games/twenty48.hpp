@@ -23,8 +23,8 @@ class Twenty48 : public SinglePlayerGame {
 public:
 
     Twenty48(int rows = 4, int cols = 4, float two_prob = 0.9);
-    SinglePlayerGameState initialize_game() override;
-    SinglePlayerGameState get_state() override;
+    void initialize_game() override;
+    std::shared_ptr<SinglePlayerGameState> get_state() override;
     int* get_valid_moves() override;
     void apply_move(int move) override;
 
