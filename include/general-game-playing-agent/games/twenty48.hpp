@@ -18,6 +18,7 @@ class Twenty48 : public SinglePlayerGame {
     int cols;
 
     void place_random_tile();
+    int get_empty_tiles(int* tiles);
 
 public:
 
