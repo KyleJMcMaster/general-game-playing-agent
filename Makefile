@@ -3,7 +3,7 @@ CXX := g++
 CXXFLAGS := -std=c++17 -Wall -Wextra -Iinclude
 
 # Source and build structure
-SRC := src/main.cpp src/games/twenty48.cpp
+SRC := src/main.cpp src/games/*.cpp src/utils/*.cpp
 OBJ := $(patsubst src/%,build/%,$(SRC:.cpp=.o))
 TARGET := build/main
 

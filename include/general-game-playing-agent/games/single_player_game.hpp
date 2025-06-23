@@ -26,7 +26,7 @@ public:
     int* get_board(){return board.get();}
     size_t get_rows(){return rows;}
     size_t get_cols(){return cols;}
-    std::unordered_map<std::string, float>* get_state_values(){return state_values.get();}
+    std::unordered_map<std::string, float>& get_state_values() { return *state_values; }
 
 };
 

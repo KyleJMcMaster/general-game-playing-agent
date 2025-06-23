@@ -19,6 +19,7 @@ class Twenty48 : public SinglePlayerGame {
 
     void place_random_tile();
     int get_empty_tiles(int *tiles);
+    bool compare_tiles(int t1, int t2);
 
 public:
 

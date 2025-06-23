@@ -25,18 +25,7 @@ class SPTextDisplay : public SinglePlayerGameDisplay{
 
 public:
 
-    void display(std::shared_ptr<SinglePlayerGameState> game_state) override {
-        int rows = game_state->get_rows();
-        int cols = game_state->get_cols();
-        int* board = game_state->get_board();
-
-        for(int i = 0; i < rows; i++){
-            for(int j = 0; j < cols; j++){
-                int val = 1 << board[i * cols + j];
-                std::cout<< ((val == 1) ? 0 : val) << "  " << ((j == cols-1) ? "\n":"");
-            }
-        }
-    }
+    void display(std::shared_ptr<SinglePlayerGameState> game_state) override;
 };
 
 #endif
