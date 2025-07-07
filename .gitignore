@@ -193,3 +193,4 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 .vscode/settings.json
+cuda-keyring_1.1-1_all.deb

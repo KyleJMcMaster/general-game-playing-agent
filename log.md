@@ -1,3 +1,7 @@
+### July 7th, 2025
+
+Following Kaparty's Gpt from scratch to build GPT model. Working on Bigram Model
+
 ### July 6th, 2025
 
 Working on MDP estimation model to learn the transition matrix. First attempt is to try a GPT style model which is trained on games played by the model.
