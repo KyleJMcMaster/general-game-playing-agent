@@ -1,3 +1,9 @@
+### August 7th, 2025
+
+Implemented Encoder/Decoder Architecture, remade data gen to match what would be seen in a game
+
+Next is to figure out how to get whole probability dist of states from model, and improve eval.
+
 ### July 7th, 2025
 
 Following Kaparty's Gpt from scratch to build GPT model. Working on Bigram Model
