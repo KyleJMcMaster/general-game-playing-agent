@@ -1,3 +1,10 @@
+### August 8th, 2025
+Built methods to evaluate model by seeing if result is feasible transition
+
+On randomly generated boards
+percentage of perfect predictions: 0.813
+avg accuracy: 0.987375
+
 ### August 7th, 2025
 
 Implemented Encoder/Decoder Architecture, remade data gen to match what would be seen in a game
