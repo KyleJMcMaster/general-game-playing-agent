@@ -5,6 +5,8 @@ On randomly generated boards
 percentage of perfect predictions: 0.813
 avg accuracy: 0.987375
 
+Next step is trying to reduce the inference time without sacrificing much predictive ability
+
 ### August 7th, 2025
 
 Implemented Encoder/Decoder Architecture, remade data gen to match what would be seen in a game
