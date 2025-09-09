@@ -1,3 +1,17 @@
+### September 9th
+Implementing beam search
+
+
+### September 3rd, 2025
+Should use Bayesian optimization for transformer selection.
+
+Optimize for inference time, while meeting requirement that difference between large model and opt model is < x%
+
+### August 25th, 2025
+Will be implementing [`beam search`](https://en.wikipedia.org/wiki/Beam_search) to estimate the probability distribution of states after an applied move
+
+On each generation step, I will keep track of the most likely tokens and their respective probabilities. This tree of tokens will be joined into states, which will each have their respective probabilities of occurrence. 
+
 ### August 8th, 2025
 Built methods to evaluate model by seeing if result is feasible transition
 
